@@ -1,15 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\TarefaController;
+use App\Http\Controllers\SalaController;
+use App\Http\Controllers\ReservaController;
 
-// Rota simples para a página inicial
 Route::get('/', function () {
     return view('welcome');
-    });
+});
 
-    // Rota para listar produtos
-    Route::get('/produtos', [ProdutoController::class, 'index']);
+Route::resource('tarefas', TarefaController::class);
 
-    // Rota que recebe um parâmetro (ID do produto)
-    Route::get('/produtos/{id}', [ProdutoController::class, 'show']);
+Route::resource('salas', SalaController::class);
+
+Route::resource('reservas', ReservaController::class);
+
+Route::get('reservas/create/{salaId}', [ReservaController::class, 'create'])->name('reservas.create');
+
+
